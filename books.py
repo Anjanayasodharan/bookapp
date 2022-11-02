@@ -11,7 +11,8 @@ while True:
     print("5 delete a book")
     print("6 update the total amount of book for each book depending on the return date")
     print("7 number of category of book")
-    print("8.exit")
+    print("8. give the bookname start from character")
+    print("9.exit")
     choice = int(input('enter an option:'))
     if(choice==1):
         print('book enter selected') 
@@ -70,7 +71,22 @@ while True:
         for i in result:
 
             print(i)
-        
     elif(choice==8):
+
+        print("search a books by character")
+
+        character=input("enter a character:-")
+
+        sql="SELECT `title`, `author`, `category`, `charge` FROM `books` WHERE `title` LIKE '"+character+"%'"
+
+        mycursor.execute(sql)
+
+        result = mycursor.fetchall()
+
+        for i in result:
+
+            print(i)
+        
+    elif(choice==9):
             break
     
