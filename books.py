@@ -4,14 +4,13 @@ mycursor = mydb.cursor()
 while True:
 
     print("select an option from the menu")
-
     print("1 add book")
-
     print("2 view all book")  
     print("3 search a book")
     print("4 update the book")    
     print("5 delete a book")
-    print("6 exit")
+    print("6 update the total amount of book for each book depending on the return date")
+    print("7.exit")
     choice = int(input('enter an option:'))
     if(choice==1):
         print('book enter selected') 
@@ -53,5 +52,13 @@ while True:
         mycursor.execute(sql)
         mydb.commit()
         print("data deleted succesfully")
-    elif(choice==6):
-        break
+    elif(choice == 6 ):
+
+        sql = 'SELECT i.`userId`, i.`bookid`, i.`issuedate`, i.`returndate`,DATEDIFF(i.`returndate`,i.issuedate) AS datediff,DATEDIFF(i.`returndate`,i.issuedate)*b.charge AS amount FROM `issuebook` i JOIN books b ON i.bookid=b.bookid'
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+       
+        print(result)
+    elif(choice==7):
+            break
+    
