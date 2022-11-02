@@ -10,7 +10,8 @@ while True:
     print("4 update the book")    
     print("5 delete a book")
     print("6 update the total amount of book for each book depending on the return date")
-    print("7.exit")
+    print("7 number of category of book")
+    print("8.exit")
     choice = int(input('enter an option:'))
     if(choice==1):
         print('book enter selected') 
@@ -57,8 +58,19 @@ while True:
         sql = 'SELECT i.`userId`, i.`bookid`, i.`issuedate`, i.`returndate`,DATEDIFF(i.`returndate`,i.issuedate) AS datediff,DATEDIFF(i.`returndate`,i.issuedate)*b.charge AS amount FROM `issuebook` i JOIN books b ON i.bookid=b.bookid'
         mycursor.execute(sql)
         result = mycursor.fetchall()
-       
-        print(result)
     elif(choice==7):
+        print("Display count of total book in each category")
+
+        sql="SELECT COUNT(*),category FROM `books` GROUP BY category"
+
+        mycursor.execute(sql)
+
+        result = mycursor.fetchall()
+
+        for i in result:
+
+            print(i)
+        
+    elif(choice==8):
             break
     
